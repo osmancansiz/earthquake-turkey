@@ -1,10 +1,31 @@
-import React, {Component} from 'react';
-import {View, Text, ActivityIndicator, YellowBox} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, ActivityIndicator, FlatList } from 'react-native';
 import axios from 'axios';
-import MapView, {Marker} from 'react-native-maps';
-
-console.disableYellowBox = true;
-
+import MapView, { Marker } from 'react-native-maps';
+console.disableYellowBox=true;
+const DATA = [
+  {
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item',
+  },
+  {
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item',
+  },
+  {
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item',
+  },
+];
+function Item({ title }) {
+  return (
+    <View style={{ flex: 1, paddingHorizontal: 20 }}>
+      <View style={{ borderWidth: 1, borderRadius: 15, height: 50, alignItems: 'center', justifyContent: 'center', marginVertical: 15, backgroundColor: '#2979FF' }}>
+        <Text style={{ fontSize: 18 }}>{title}</Text>
+      </View>
+    </View>
+  );
+}
 export default class App extends Component {
   state = {
     markers: [],
@@ -37,10 +58,10 @@ export default class App extends Component {
   }
   render() {
     return (
-      <View style={{flex: 1}}>
-        <View style={{flex: 0.5}}>
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 0.5 }}>
           <MapView
-            style={{width: '100%', height: '100%'}}
+            style={{ width: '100%', height: '100%' }}
             initialRegion={{
               latitude: 38.9977645,
               longitude: 34.7361951,
@@ -56,8 +77,13 @@ export default class App extends Component {
             ))}
           </MapView>
         </View>
-        <View style={{flex: 0.5}}>
+        <View style={{ flex: 0.5 }}>
           <ActivityIndicator animating={this.state.loading} size="large" />
+          <FlatList
+            data={this.state.markers}
+            renderItem={({ item }) => <Item title={item.title} />}
+            keyExtractor={item => item.id}
+          />
         </View>
       </View>
     );
