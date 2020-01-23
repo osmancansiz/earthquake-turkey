@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, ActivityIndicator} from 'react-native';
+import {View, Text, ActivityIndicator, YellowBox} from 'react-native';
 import axios from 'axios';
 import MapView, {Marker} from 'react-native-maps';
+
+console.disableYellowBox = true;
 
 export default class App extends Component {
   state = {
@@ -54,8 +56,8 @@ export default class App extends Component {
             ))}
           </MapView>
         </View>
-        <View style={{flex: 1}}>
-          <ActivityIndicator animating={this.state.loading} size="large"/>
+        <View style={{flex: 0.5}}>
+          <ActivityIndicator animating={this.state.loading} size="large" />
         </View>
       </View>
     );
