@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {View, Text, ActivityIndicator, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
 import axios from 'axios';
 import MapView, {Marker} from 'react-native-maps';
 
@@ -23,16 +29,7 @@ console.disableYellowBox = true;
 function Item({title}) {
   return (
     <View style={{flex: 1, paddingHorizontal: 20}}>
-      <View
-        style={{
-          borderWidth: 1,
-          borderRadius: 15,
-          height: 50,
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginVertical: 15,
-          backgroundColor: '#2979FF',
-        }}>
+      <View style={styles.flatList}>
         <Text style={{fontSize: 18}}>{title}</Text>
       </View>
     </View>
@@ -101,3 +98,15 @@ export default class App extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  flatList: {
+    borderWidth: 1,
+    borderRadius: 15,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 15,
+    backgroundColor: '#ff5722',
+  },
+});
